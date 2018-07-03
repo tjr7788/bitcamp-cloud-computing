@@ -1,0 +1,106 @@
+// build.gradle �뙆�씪
+// - gradle 鍮뚮뱶 �룄援ш� �궗�슜�븯�뒗 �꽕�젙 �뙆�씪�씠�떎.
+// - gradle 鍮뚮뱶 �룄援ш� �떎�뻾�븷 紐낅졊�쓣 �씠 �뙆�씪�뿉 �옉�꽦�븳�떎.
+
+// 1) gradle 鍮뚮뱶 �룄援ш� �궗�슜�븷 �뵆�윭洹몄씤 異붽�
+// => �씠�겢由쎌뒪 愿��젴 �뙆�씪�쓣 �깮�꽦�븯怨� �젣嫄고븯�뒗 紐낅졊�뼱媛� �뱾�뼱 �엳�뒗 �뵆�윭洹몄씤
+apply plugin: 'eclipse-wtp' 
+
+// => �옄諛� 愿��젴 �옉�뾽�쓣 �닔�뻾�븷 紐낅졊�뼱媛� �뱾�뼱 �엳�뒗 �뵆�윭洹몄씤
+apply plugin: 'java'
+
+// => web archive �뙆�씪�쓣 �떎猷⑤뒗 紐낅졊�뼱媛� �뱾�뼱 �엳�뒗 �뵆�윭洹몄씤
+apply plugin: 'war'
+
+compileJava {
+    // 而댄뙆�씪 �븷 �븣 �냼�뒪 �뙆�씪�쓽 �씤肄붾뵫 �샃�뀡�쓣 異붽��븷 寃껋씠�떎.
+    options.encoding = 'UTF-8'
+}
+
+war {
+    // war �뙆�씪�쓣 �깮�꽦�븷 �븣 �궗�슜�븷 �뙆�씪紐� �꽕�젙�븯湲�
+    // => �뙆�씪紐낆쓣 �꽕�젙�븯吏� �븡�쑝硫� �봽濡쒖젥�듃 �씠由꾩쑝濡� �깮�꽦�맂�떎.
+    archiveName = "pms.war"
+}
+
+eclipse {
+    wtp {
+        facet {
+            facet name: 'jst.web', version: '3.1'
+        }
+    }
+}
+
+// �봽濡쒖젥�듃�뿉�꽌 �궗�슜�븯�뒗 �쓽議� �씪�씠釉뚮윭由щ�� �쇅遺��쓽 �뵒�젆�넗由щ줈 蹂듭궗�븯�뒗 紐낅졊 異붽�
+task copyJars(type: Copy) {
+  from configurations.runtime
+  into "build/libs/deps"
+}
+
+// => �쓽議� �씪�씠釉뚮윭由щ�� 蹂닿��븯怨� �엳�뒗 �꽌踰꾨�� 吏��젙�븳�떎.
+repositories {
+    // https://repo.maven.apache.org/maven2/ �꽌踰꾩뿉�꽌 �떎�슫濡쒕뱶 諛쏅뒗�떎.
+    mavenCentral() 
+}
+
+// => �떎�슫濡쒕뱶�븷 �쓽議� �씪�씠釉뚮윭由щ�� 吏��젙�븳�떎.
+dependencies {
+    // https://mvnrepository.com/artifact/mysql/mysql-connector-java
+    compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.46'
+
+    // Mybatis �씪�씠釉뚮윭由�
+    compile group: 'org.mybatis', name: 'mybatis', version: '3.4.6'
+    
+    // mybatis瑜� spring怨� �뿰�룞�떆�궎�뒗 �씪�씠釉뚮윭由�
+    compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.3.2'
+    
+    // Spring IoC 而⑦뀒�씠�꼫 �씪�씠釉뚮윭由�
+    compile group: 'org.springframework', name: 'spring-webmvc', version: '5.0.6.RELEASE'
+    //compile group: 'org.springframework', name: 'spring-context', version: '5.0.6.RELEASE'
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.0.6.RELEASE'
+    
+    // AOP 愿��젴 �씪�씠釉뚮윭由�
+    compile group: 'org.aspectj', name: 'aspectjweaver', version: '1.9.1'
+    
+    // DB 而ㅻ꽖�뀡�� �씪�씠釉뚮윭由�
+    compile group: 'commons-dbcp', name: 'commons-dbcp', version: '1.4'
+    
+    // JSP �솗�옣 �깭洹몄씤 JSTL �씪�씠釉뚮윭由�
+    compile group: 'javax.servlet', name: 'jstl', version: '1.2'
+    
+    // @Controller媛� 遺숈� �씪諛섏쟻�씤 �럹�씠吏� 而⑦듃濡ㅻ윭�쓽 �슂泥� �빖�뱾�윭瑜� �떎�뻾�븷 �븣 
+    // �슂泥� �뙆�씪誘명꽣�쓽 臾몄옄�뿴�쓣 int�굹 boolean �벑�쑝濡� 諛붽씀湲� �쐞�빐  
+    // 湲곕낯�쑝濡� �옣李⑸맂 蹂��솚湲곕�� �궗�슜�븳�떎. 
+    // 洹� 蹂��솚湲곕뒗 HttpMessageConverter 洹쒖튃�뿉 �뵲�씪 留뚮뱺 蹂��솚湲곗씠�떎.
+    //  
+    // 洹몃윴�뜲 @RestController �븷�끂�뀒�씠�뀡�씠 遺숈� �럹�씠吏� 而⑦듃濡ㅻ윭�쓽 �슂泥� �빖�뱾�윭瑜� �떎�뻾�븷 �븣 
+    // �뒪�봽留곸� 湲곕낯 �뜲�씠�꽣 蹂��솚湲곕줈�꽌 MappingJackson2HttpMessageConverter瑜� �궗�슜�븳�떎.
+    // �씠 而⑤쾭�꽣�뒗 JSON �뜲�씠�꽣瑜� 泥섎━�븷 �닔 �엳�떎.
+    // 
+    // MappingJackson2HttpMessageConverter?
+    // => �슂泥� �뙆�씪誘명꽣濡� JSON 臾몄옄�뿴�쓣 諛쏆쑝硫� �슂泥� �빖�뱾�윭瑜� �샇異쒗븷 �븣 �옄諛� 媛앹껜濡� 蹂��솚�떆�궓�떎. 
+    // => �슂泥� �빖�뱾�윭媛� �옄諛� 媛앹껜瑜� 由ы꽩�븷 �븣 JSON 臾몄옄�뿴濡� 蹂��솚�븳�떎.
+    // 
+    // 二쇱쓽! 
+    // => MappingJackson2HttpMessageConverter瑜� �궗�슜�븯�젮硫� �씠 媛앹껜媛� �쓽議댄븯�뒗 �씪�씠釉뚮윭由щ��  
+    //    �떎�쓬怨� 媛숈씠 異붽��빐�빞 �븳�떎. 
+    //compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.6'
+    
+    // 洹몃윴�뜲 JSON �뜲�씠�꽣瑜� 泥섎━�븷 �븣 
+    // MappingJackson2HttpMessageConverter ���떊 GsonHttpMessageConverter 瑜� �궗�슜�븷 �닔 �엳�떎. 
+    // �떒 GsonHttpMessageConverter瑜� �궗�슜�븯�젮硫� �씠 媛앹껜媛� �쓽議댄븯�뒗 �씪�씠釉뚮윭由щ�� 
+    // �떎�쓬怨� 媛숈씠 異붽��빐�빞 �븳�떎.
+    // 利�, Jackson �삉�뒗 Gson �몮 以� �븳 媛쒖쓽 �씪�씠釉뚮윭由щ쭔 異붽��븯�씪!
+    compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+    
+    // �꽌釉붾┸ �씪�씠釉뚮윭由�
+    // => �뼱�뒓 踰꾩쟾�쓽 �꽌釉붾┸ 洹쒖튃�뿉 �뵲�씪 留뚮뱺 �꽌踰꾩씤吏��뿉 �뵲�씪 
+    //    洹� 踰꾩쟾�쓽 �씪�씠釉뚮윭由щ�� �떎�슫濡쒕뱶 諛쏆븘�빞 �븳�떎.
+    // => 利� �꽌踰꾩� 媛숈� 踰꾩쟾�쓽 �씪�씠釉뚮윭由щ�� �떎�슫濡쒕뱶 諛쏆븘�꽌 �궗�슜�빐�빞留� 洹� �꽌踰꾩뿉�꽌 �떎�뻾�븷 �닔 �엳�떎.
+    providedCompile group: 'javax.servlet', name: 'javax.servlet-api', version: '4.0.1'
+    
+}
+
+
+
+
