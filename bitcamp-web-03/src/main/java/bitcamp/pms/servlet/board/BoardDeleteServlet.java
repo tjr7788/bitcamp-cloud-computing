@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import bitcamp.pms.dao.BoardDao;
+
 
 @SuppressWarnings("serial")
 @WebServlet("/board/delete")
@@ -32,17 +34,10 @@ public class BoardDeleteServlet extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            try (
-                Connection con = DriverManager.getConnection(
-                    "jdbc:mysql://52.79.234.169:3306/studydb",
-                    "study", "1111");
-                    PreparedStatement stmt = con.prepareStatement(
-                    "delete from pms2_board where bno=?");) {
-                stmt.setString(1, request.getParameter("no"));
-                stmt.executeUpdate();
-                out.println("삭제완료");
-            }  
+            if (((BoardDao)getServletContext().getAttribute("boardDao")).delete(request.getParameter("no")) == 0) {
+                out.println("<tr><td>해당하는 게시글이 없습니다.</td></tr>");                
+            }
+            out.println("삭제완료");
         } catch (Exception e) {
             out.println("<tr><td>삭제실패!</td></tr>");
             e.printStackTrace(out);

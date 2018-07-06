@@ -31,13 +31,12 @@ public class MemberAddServlet extends HttpServlet {
         out.println("<body>");
         out.println("<h1>회원 등록 결과</h1>");
         try {
-            MemberDao memberDao = new MemberDao("jdbc:mysql://52.79.234.169:3306/studydb", "study", "1111");
-            Member member = new Member();
-            member.setId(request.getParameter("id"));
-            member.setEmail(request.getParameter("email"));
-            member.setPassword(request.getParameter("password"));
-            memberDao.add(member);
-            out.println("<p>등록 성공!</p>");
+                Member member = new Member();
+                member.setId(request.getParameter("id"));
+                member.setEmail(request.getParameter("email"));
+                member.setPassword(request.getParameter("password"));
+                ((MemberDao)getServletContext().getAttribute("memberDao")).add(member);
+                out.println("<p>등록 성공!</p>");
         } catch (Exception e) {
             out.println("<p>등록 실패!</p>");
             e.printStackTrace(out);

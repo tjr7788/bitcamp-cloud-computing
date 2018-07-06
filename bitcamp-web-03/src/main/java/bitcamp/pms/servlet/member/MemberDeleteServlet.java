@@ -30,12 +30,10 @@ public class MemberDeleteServlet extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         try {
-            MemberDao memberDao = new MemberDao("jdbc:mysql://52.79.234.169:3306/studydb", "study", "1111");
-            if (memberDao.delete(request.getParameter("id")) == 0) {
-                out.println("<tr><td>해당회원이없습니다.!</td></tr>");
-            } else {
-                out.println("<tr><td>삭제성공!</td></tr>");
-            }
+                if (((MemberDao)getServletContext().getAttribute("memberDao")).delete(request.getParameter("id")) == 0) {
+                    out.println("<tr><td>해당아이디가 없습니다.</td></tr>");
+                }
+                out.println("삭제완료");
         } catch (Exception e) {
             out.println("<tr><td>삭제실패!</td></tr>");
             e.printStackTrace(out);

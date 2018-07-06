@@ -2,7 +2,6 @@ package bitcamp.pms.servlet.member;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,16 +37,15 @@ public class MemberListServlet extends HttpServlet {
         out.println("    <th>아이디</th><th>이메일</th>");
         out.println("</tr>");
         try {
-            MemberDao memberDao = (MemberDao)getServletContext().getAttribute("memberDao"); //HttpServlet에있는 getServletContext메소드를 호출하여 ServletContext를 가져오고 가져온 Servlet에서 listener로준 memberDao를 가져온다
-            List<Member> list = memberDao.selectList();
-            for (Member member : list) {
+            for (Member member : ((MemberDao)getServletContext().getAttribute("memberDao")).selectList()) {
                 out.println("<tr>");
                 out.printf("    <td><a href='view?id=%s'>%s</a></td><td>%s</td>\n",
-                        member.getId(),
-                        member.getId(),
-                        member.getEmail());
+                    member.getId(),
+                    member.getId(),
+                    member.getEmail());
                 out.println("</tr>");
             }
+            
         } catch (Exception e) {
             out.println("<tr><td>목록 가져오기 실패!</td></tr>");
             e.printStackTrace(out);
@@ -56,5 +54,4 @@ public class MemberListServlet extends HttpServlet {
         out.println("</table>");
         out.println("</html>");
     }
-    
 }

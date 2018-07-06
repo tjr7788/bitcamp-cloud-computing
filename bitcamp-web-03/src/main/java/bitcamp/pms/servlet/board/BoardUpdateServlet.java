@@ -2,16 +2,15 @@ package bitcamp.pms.servlet.board;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import bitcamp.pms.dao.BoardDao;
+import bitcamp.pms.domain.Board;
 
 
 @SuppressWarnings("serial")
@@ -30,18 +29,14 @@ public class BoardUpdateServlet extends HttpServlet {
         out.println("</head>");
         out.println("<body>");
         out.println("<h1>회원 변경 결과</h1>");
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            try (
-                Connection con = DriverManager.getConnection(
-                        "jdbc:mysql://52.79.234.169:3306/studydb",
-                        "study", "1111");
-                PreparedStatement stmt = con.prepareStatement(
-                        "update pms2_board set titl=?, cont=?, cdt=now() where bno=?");) {
-                stmt.setString(1, request.getParameter("title"));
-                stmt.setString(2, request.getParameter("content"));
-                stmt.setString(3, request.getParameter("no"));
-                stmt.executeUpdate();
+        try {   
+            Board board = new Board();
+            board.setTitle(request.getParameter("title"));
+            board.setContent(request.getParameter("content"));
+            board.setNo(Integer.parseInt(request.getParameter("no")));
+            if (((BoardDao)getServletContext().getAttribute("boardDao")).update(board) == 0) {
+                out.println("<p>해당하는 번호의 게시글이 없습니다.</p>");
+            } else {
                 out.println("<p>변경 성공!</p>");
             }
         } catch (Exception e) {

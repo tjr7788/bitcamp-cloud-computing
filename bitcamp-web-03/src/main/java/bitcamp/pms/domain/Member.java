@@ -1,10 +1,9 @@
 package bitcamp.pms.domain;
 
 public class Member {
-    protected String id;
-    protected String email;
-    protected String password;
-    
+    private String id;
+    private String email;
+    private String password;
     
     public String getId() {
         return id;
