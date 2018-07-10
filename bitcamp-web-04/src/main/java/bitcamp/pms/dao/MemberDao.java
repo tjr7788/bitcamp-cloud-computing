@@ -62,7 +62,7 @@ public class MemberDao {
         }  
     }
     
-    public void add(Member member) throws Exception {
+    public void insert(Member member) throws Exception {
         try (
             Connection con = DriverManager.getConnection(jdbc, username, password);
             PreparedStatement stmt = con.prepareStatement(

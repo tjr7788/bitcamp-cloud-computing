@@ -56,7 +56,7 @@ public class BoardDao {
                     Board board = new Board();
                     board.setNo(rs.getInt("bno"));
                     board.setTitle(rs.getString("titl"));
-                    board.setContent(rs.getString("cont"));
+                    board.setContents(rs.getString("cont"));
                     board.setDate(rs.getString("cdt"));
                     return board;
                 } else {
@@ -74,7 +74,7 @@ public class BoardDao {
                 "insert into pms2_board(titl,cont,cdt) values(?,?,now())");) {
             
             stmt.setString(1, board.getTitle());
-            stmt.setString(2, board.getContent());
+            stmt.setString(2, board.getContents());
             stmt.executeUpdate();
         }
     }
@@ -85,7 +85,7 @@ public class BoardDao {
             PreparedStatement stmt = con.prepareStatement(
                     "update pms2_board set titl=?, cont=?, cdt=now() where bno=?");) {
             stmt.setString(1, board.getTitle());
-            stmt.setString(2, board.getContent());
+            stmt.setString(2, board.getContents());
             stmt.setInt(3, board.getNo());
             return stmt.executeUpdate();
         }
