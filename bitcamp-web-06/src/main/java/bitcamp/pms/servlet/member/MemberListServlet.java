@@ -26,15 +26,11 @@ public class MemberListServlet extends HttpServlet {
             params.put("startIndex", (page - 1) * size);
             params.put("pageSize", size);
         }
-        response.setContentType("text/html;charset=UTF-8");
         try {
             request.setAttribute("list", ((MemberDao)getServletContext().getAttribute("memberDao")).selectList(params));
-            RequestDispatcher rd = request.getRequestDispatcher("/member/list.jsp");
-            rd.include(request, response);
+            request.setAttribute("view", "/member/list.jsp");
         } catch (Exception e) {
             request.setAttribute("error", e);
-            RequestDispatcher rd = request.getRequestDispatcher("/error.jsp");
-            rd.forward(request, response);
         }
     }
 }

@@ -1,52 +1,49 @@
 package bitcamp.pms.dao;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import bitcamp.pms.domain.Member;
+import bitcamp.pms.domain.Board;
 
-public class MemberDao {
+public class BoardDao {
     
     SqlSessionFactory sqlSessionFactory;
-
-    public MemberDao(SqlSessionFactory sqlSessionFactory) {
+    public BoardDao(SqlSessionFactory sqlSessionFactory) {
         this.sqlSessionFactory = sqlSessionFactory;
     }
     
-    public List<Member> selectList(Map<String, Object> params) throws Exception {
+    public List<Board> selectList() throws Exception {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            return sqlSession.selectList("member.selectList", params);
+            return sqlSession.selectList("board.selectList");
         }
     }
     
-    public Member selectOne(String id) throws Exception {
+    public Board selectOne(String no) throws Exception {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            return sqlSession.selectOne("member.selectOne", id);
+            return sqlSession.selectOne("board.selectOne", no);
         }
     }
     
-    public int update(Member member) throws Exception {
+    public int insert(Board board) throws Exception {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            int count = sqlSession.update("member.update", member);
+            int count = sqlSession.insert("board.insert", board);
             sqlSession.commit();
             return count;
         }
     }
     
-    public int delete(String id) throws Exception {
+    public int update(Board board) throws Exception {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            int count = sqlSession.delete("member.delete", id);
+            int count = sqlSession.update("board.update", board);
             sqlSession.commit();
             return count;
         }
     }
-    
-    public int insert(Member member) throws Exception {
+    public int delete(String no) throws Exception {
         try (SqlSession sqlSession = sqlSessionFactory.openSession()) {
-            int count = sqlSession.insert("member.insert", member);
+            int count = sqlSession.delete("board.delete", no);
             sqlSession.commit();
             return count;
         }

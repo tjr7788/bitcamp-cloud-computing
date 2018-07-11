@@ -10,20 +10,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import bitcamp.pms.dao.BoardDao;
-import bitcamp.pms.domain.Board;
 
 
 @SuppressWarnings("serial")
-@WebServlet("/board/view")
-public class BoardViewServlet extends HttpServlet {
+@WebServlet("/board/list")
+public class BoardListServlet extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
-            Board board = ((BoardDao)getServletContext().getAttribute("boardDao")).selectOne(request.getParameter("no"));
-            request.setAttribute("board", board);
-            RequestDispatcher rd = request.getRequestDispatcher("/board/view.jsp");
+            BoardDao boardDao = (BoardDao)getServletContext().getAttribute("boardDao");
+            request.setAttribute("list", boardDao.selectList());
+            RequestDispatcher rd = request.getRequestDispatcher("/board/list.jsp");
             rd.include(request, response);
         } catch (Exception e) {
             request.setAttribute("error", e);
