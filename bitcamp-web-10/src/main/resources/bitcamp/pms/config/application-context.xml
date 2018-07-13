@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+        
+  <context:component-scan base-package="bitcamp.pms">
+    <context:exclude-filter type="regex" expression="bitcamp.pms.test.*"/>      <!-- 저기 패키지안에 있는것은 안찾아봐도된다. -->
+  </context:component-scan>
+  
+<!--   <bean id="sqlSessionFactoryBuilder" class="org.apache.ibatis.session.SqlSessionFactoryBuilder"/> -->
+  <!-- <bean id="sqlSessionFactory" factory-bean="sqlSessionFactoryBuilder" factory-method="build">
+    <constructor-arg ref="inputStream"/>       인스턴스를 넘길떈 ref로 넘긴다, 또한 순서는 상관없다.
+  </bean> -->
+  <!-- <bean id="inputStream" class="org.apache.ibatis.io.Resources" factory-method="getResourceAsStream">
+    <constructor-arg value="bitcamp/pms/config/mybatis-config.xml"/>    기본값을 넘길땐 value
+  </bean> -->
+  <!-- <bean id="sqlSessionFactory" class="bitcamp.pms.factory.SqlSessionFactoryBean"/> -->
+</beans>
