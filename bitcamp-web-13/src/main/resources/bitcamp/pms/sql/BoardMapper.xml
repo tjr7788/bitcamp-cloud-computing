@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="board">
+
+  <select id="selectList" resultType="bitcamp.pms.domain.Board">
+    select bno no, titl title, cont contents, cdt date from pms2_board
+  </select>
+  
+  <select id="selectOne" 
+          resultType="bitcamp.pms.domain.Board" 
+          parameterType="java.lang.String">
+    select bno no, titl title, cont contents, cdt date from pms2_board where bno=#{value}
+  </select>
+  
+  <update id="update" parameterType="bitcamp.pms.domain.Board">
+    update pms2_board set titl=#{title}, cont=#{contents}, cdt=now() where bno=#{no}
+  </update>
+  
+  <delete id="delete" parameterType="java.lang.String">
+    delete from pms2_board where bno=#{value}
+  </delete>
+  
+  <insert id="insert" parameterType="bitcamp.pms.domain.Board">
+    insert into pms2_board(titl,cont,cdt) values(#{title},#{contents},now())
+  </insert>
+
+</mapper>
