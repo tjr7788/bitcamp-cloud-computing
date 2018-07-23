@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>반복문 for</h1>
+<script>
+var obj = new Object();
+obj.name = "홍길동";
+obj.kor = 100;
+obj.eng = 100;
+obj.math = 96;
+obj.sum = obj.kor + obj.eng + obj.math;
+obj.aver = obj.sum / 3;
+
+for (var i in obj) {
+    console.log(i, obj[i]);
+}
+</script>
+
+</body>
+</html>

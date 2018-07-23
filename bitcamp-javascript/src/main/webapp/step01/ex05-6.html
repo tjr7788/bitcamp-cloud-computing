@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<body>
+<h1>배열 선언</h1>
+
+<script type="text/javascript">
+"use strict"
+
+ 
+var arr = new Array();
+
+arr[0] = 100;
+arr[1] = 200;
+arr[2] = 300;
+arr[3] = 400;
+arr[4] = 500;
+
+console.log("-----------");
+for (var i = 0; i < arr.length; i++) {
+    console.log(arr[i]);
+}
+console.log("-----------");
+
+function f1(value, index) {
+    console.log(value, index);
+}
+
+arr.forEach(f1);
+
+
+
+
+
+</script>
+</body>
+</html>

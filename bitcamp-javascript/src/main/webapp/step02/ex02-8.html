@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>반복문 for</h1>
+<script>
+var obj = new Object();
+obj.name = "홍길동";
+obj.kor = 100;
+obj.eng = 100;
+obj.math = 96;
+obj.sum = obj.kor + obj.eng + obj.math;
+obj.aver = obj.sum / 3;
+
+
+var myMap = new Map();
+myMap.set("name", "홍길동");
+myMap.set("name1", "123");
+myMap.set("name2", "456");
+for (var i of myMap) {
+    console.log(i[0], i[1]);
+}
+
+for (var i of "hlloe") {
+    console.log(i);
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+i<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<body>
+<h1>변수 선언 - 글로벌 변수, 로컬 변수 충돌</h1>
+
+<script type="text/javascript">
+"use strict"
+
+var a = 100;
+function f() {
+	var a = 200;
+	{
+	   var c = 300;
+	}
+	console.log(a);
+	console.log(window.a);
+	console.log(c);
+}
+f();
+console.log(a);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>함수 레퍼런스</h1>
+<script>
+"use strict"
+
+function f1(op) {
+    switch (op) {
+    case "+":
+        return function plus(a, b) {console.log(a + b);}
+    case "-":
+        return function minus(a, b) {console.log(a - b);}
+    case "*":
+        return function multiple(a, b) {console.log(a * b);}
+    case "/":
+        return function devide(a, b) {console.log(a / b);}
+    default:
+        return function error() {console.log("지원하지않는 연산자");} 
+    }
+}
+var a = f1("*");
+
+a(5, 7);
+
+</script>
+
+<script>
+var x = f1("+");
+var y = f1("+");
+
+if (x == y) {
+    console.log("같다");
+} else {
+    console.log("다르다");
+}
+
+</script>
+
+</body>
+</html>

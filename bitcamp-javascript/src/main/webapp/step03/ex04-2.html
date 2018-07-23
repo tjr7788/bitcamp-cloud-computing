@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+
+function outer(p1) {
+    var obj = new Object();
+    obj.f1 = function() {p1 += 1};
+    obj.f2 = function() {p1 += 10};
+    obj.f3 = function() {p1 += 100};
+    obj.f4 = function() {console.log(p1)};
+    return obj;
+}
+var x = outer(100);
+var y = outer(200);
+x.f2();
+x.f2();
+y.f1();
+y.f2();
+y.f4();
+x.f4();
+</script>
+
+</body>
+</html>

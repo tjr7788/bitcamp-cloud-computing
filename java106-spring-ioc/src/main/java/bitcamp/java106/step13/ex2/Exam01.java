@@ -27,7 +27,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 // => Target Object : Advice를 삽입할 대상 객체이다.
 //                    예) X, Y, C 클래스
 // => Aspect        : 어느 pointcut 에 어떤 advice를 삽입할 것인지 가리키는 정보이다.
-//                    예) 설정 정보 
+//                    예) 설정 정보  
 //
 public class Exam01 {
 
