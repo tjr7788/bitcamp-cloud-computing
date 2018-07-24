@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+
+var interest = 0.018; // 연이자율
+
+function bank() {
+    return money => {
+        console.log(money + (money * interest));
+    };
+}
+var compute = bank();
+compute(100);
+</script>
+
+</body>
+</html>

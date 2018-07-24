@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+
+var scores = [
+    {
+	    name: "홍길동",
+	    kor: 100,
+	    eng: 100,
+	    sum() {return this.kor + this.eng},
+	    aver() {return this.sum() / 2}
+    },
+    { 
+        name: "임꺽정",
+        kor: 100,
+        eng: 100,
+        sum() {return this.kor + this.eng},
+        aver() {return this.sum() / 2}
+    },
+    { 
+        name: "유관순",
+        kor: 100,
+        eng: 100,
+        sum() {return this.kor + this.eng},
+        aver() {return this.sum() / 2}
+    }
+    
+    
+]
+    
+
+
+console.log(scores[0]);
+</script>
+
+</body> 

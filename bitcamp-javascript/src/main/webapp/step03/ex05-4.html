@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+
+function f1(a, b, c = 100, d) {
+    console.log("=> ", a, b, c, d);
+    console.log("---------------------")
+    for (var value of arguments) {
+        console.log(value);
+    }
+    console.log("======================")
+}
+f1();
+f1(100);
+f1(100, 200);
+f1(100, 200, 300);
+f1(100, 200, 300, 400);
+f1(100, 200, 300, 400, 500);
+
+
+
+</script>
+
+</body>
+</html>

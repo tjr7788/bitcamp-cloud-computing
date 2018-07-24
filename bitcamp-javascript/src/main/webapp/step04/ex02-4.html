@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+var obj1 = { 
+    result : 0,
+    plus(value) {
+       this.result += value;
+    }
+};
+obj1.plus(100);
+console.log(obj1.result);
+</script>
+
+</body> 

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+var obj1 = new Object();
+obj1.result = 0;
+obj1.plus = function(value) {this.result += value};
+obj1.minus = function(value) {this.result -= value};
+
+// Arrow 함수에서 this는 무조건 window 객체를 가리킨다.
+obj1.plus(100);
+obj1.minus(20);
+console.log(obj1.result);
+
+function test() {
+    console.log(this);
+}
+var obj3 = new Object();
+obj3.value = 100;
+obj3.f1 = function() {console.log(this)};
+obj3.f1();
+</script>
+
+</body> 

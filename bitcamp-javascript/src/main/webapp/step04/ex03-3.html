@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+
+function createScore(name, kor, eng) {
+    return {
+        name: name,
+        kor: kor,
+        eng: eng,
+        sum() {return this.kor + this.eng},
+        aver() {return this.sum() / 2}
+    }
+}
+
+var scores = [createScore("홍길동", 100, 100), createScore("임꺽정", 100, 100), createScore("유관순", 100, 100)];
+
+
+console.log(scores[0]);
+</script>
+
+</body> 

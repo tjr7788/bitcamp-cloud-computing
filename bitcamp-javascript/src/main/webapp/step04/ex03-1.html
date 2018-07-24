@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+var s1 = { 
+    name: "홍길동",
+    kor: 100,
+    eng: 100,
+    sum() {return this.kor + this.eng},
+    aver() {return this.sum() / 2}
+};
+
+var s2 = { 
+    name: "임꺽정",
+    kor: 100,
+    eng: 100,
+    sum() {return this.kor + this.eng},
+    aver() {return this.sum() / 2}
+};
+
+var s3 = { 
+    name: "유관순",
+    kor: 100,
+    eng: 100,
+    sum() {return this.kor + this.eng},
+    aver() {return this.sum() / 2}
+};
+console.log(s1.name, s1.sum(), s1.aver());
+console.log(s2.name, s2.sum());
+console.log(s3.name, s3.sum());
+</script>
+
+</body> 

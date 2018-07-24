@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+
+function Score(name, kor, eng, math) {
+    var obj = new Object();
+    obj.setName = function(n) {name = n};
+    obj.getName = function() {return name};
+    obj.setKor = function(value) {kor = value};
+    obj.getKor = function() {return kor};
+    obj.setEng = function(value) {eng = value};
+    obj.getEng = function() {return eng};
+    obj.setMath = function(value) {math = value};
+    obj.getMath = function() {return math};
+    obj.sum = function() {return kor + eng + math};
+    obj.aver = function() {return this.sum() / 3};
+    
+    return obj;
+}
+
+var s1 = Score("홍길동", 100, 100, 96);
+var s2 = Score("임꺽정", 95, 95, 96);
+
+console.log(s1.getName(), s1.sum(), s1.aver());
+console.log(s2.getName(), s2.sum(), s2.aver());
+
+
+</script>
+
+</body>
+</html>

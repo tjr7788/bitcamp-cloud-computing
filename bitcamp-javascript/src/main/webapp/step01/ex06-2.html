@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<body>
+<h1>변수 선언</h1>
+
+<script type="text/javascript">
+"use strict"
+
+var obj = new Object();
+obj.name = "홍길동";
+obj.kor = 100;
+obj.eng = 90;
+obj.math = 100;
+
+var {name, kor} = obj;
+console.log(name, kor);
+
+var {name:n, kor:k} = obj;
+console.log(n, k);
+
+var {name:n, sum:s = 0, aver:a = 0} = obj;
+console.log(n, s, a);
+
+</script>
+</body>
+</html>
