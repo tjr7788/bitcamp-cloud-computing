@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+
+function Score(name, kor, eng) {
+	this.name = name,
+	this.kor = kor,
+	this.eng = eng
+}
+
+
+Score.prototype.sum = function() {return this.kor + this.eng};
+Score.prototype.aver = function() {return this.sum() / 2};
+
+Score.toObject = function(str) {
+    var values = str.split(",");
+    return new Score(values[0], parseInt(values[1]), parseInt(values[2]));
+}
+
+var scores = [Score.toObject("홍길동,100,100"), Score.toObject("임꺽정,100,100"), Score.toObject("유관순,100,100")];
+
+for (var s of scores) {
+    console.log(s.sum(), s.aver());
+}
+
+var obj = new Score("윤봉길",100,200);
+obj.toObject("김구,200,100");
+console.log(obj);
+</script>
+
+</body> 

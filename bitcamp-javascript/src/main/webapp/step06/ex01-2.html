@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>DOM(Document Object Model) API</h1>
+<h2 id="header1">제목1</h2>
+<h2 id="header2">제목2</h2>
+<h2 id="header3">제목3</h2>
+<h2 id="header4">제목4</h2>
+<script>
+"use strict"
+
+var el = document.getElementsByTagName("h2");
+
+
+console.log("----------------------------");
+for (var i of el) console.log(i);
+</script>
+
+</body>
+</html>

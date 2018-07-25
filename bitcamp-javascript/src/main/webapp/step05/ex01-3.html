@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>window객체</h1>
+<script>
+"use strict"
+
+window.setTimeout(() => {
+    console.log("호출됨");
+}, 2000)
+var count = 0;
+var tid = window.setInterval(() => {
+    count++;
+    console.log("주기적으로호출")
+    if (count == 5) {
+        clearInterval(tid)
+    }
+}, 5000);
+
+</script>
+
+</body>
+</html>

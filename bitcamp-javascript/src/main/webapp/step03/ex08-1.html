@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+
+function f1() {
+    console.log("hello")
+}
+
+f1.value = 100;
+f1.plus = function(v) {this.value += v};
+f1.hello = function() {console.log("hello")};
+
+f1.plus(200);
+console.log(f1.value);
+f1.hello();
+
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>location객체</h1>
+
+
+<script>
+"use strict"
+console.log(window.navigator);
+
+var position = navigator.geolocation.getCurrentPosition((pos) => {
+    console.log("222222");
+    console.log(pos.coords.latitude, pos.coords.longitude);
+    console.log(pos.timestamp);
+});
+
+console.log("1111");
+
+
+
+
+</script>
+
+</body>
+</html>

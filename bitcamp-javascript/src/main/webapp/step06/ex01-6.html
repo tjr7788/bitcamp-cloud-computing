@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>DOM(Document Object Model) API</h1>
+<div id="d1">
+	<h2 id="header1" class="g1 g3">제목1</h2>
+	<h2 id="header2" class="g1">제목2</h2>
+	<h2 id="header3" class="g1 g2 g3">제목3</h2>
+	<h2 id="header4" class="g2">제목4</h2>
+</div>
+
+<div id="d2">
+    <h2 id="header1" class="g1 g3">제목1</h2>
+    <h2 id="header2" class="g1">제목2</h2>
+    <h2 id="header3" class="g1 g2 g3">제목3</h2>
+    <h2 id="header4" class="g2">제목4</h2>
+</div>
+
+<h2 id="header1" class="g1 g3">제목1</h2>
+<h2 id="header2" class="g1">제목2</h2>
+<h2 id="header3" class="g1 g2 g3">제목3</h2>
+<h2 id="header4" class="g2">제목4</h2>
+<script>
+"use strict"
+
+
+var el = document.querySelectorAll(".g1.g3");
+console.log("----------------------------");
+console.log(el);
+
+var el = d2.querySelectorAll(".g1.g3");
+console.log("----------------------------");
+console.log(el);
+
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<style>
+div {
+    border: 1px solid red;
+    margin: 10px 20px 30px 40px;
+}
+#d1 {
+    height: 200px;
+}
+#d2 {
+    height: 300px;
+}
+</style>
+</head>
+<body>
+<h1>DOM(Document Object Model) API</h1>
+<div id="d1">
+	<h2 id="header1" class="g1 g3">제목1</h2>
+	<h2 id="header2" class="g1">제목2</h2>
+	<h2 id="header3" class="g1 g2 g3">제목3</h2> 
+	<h2 id="header4" class="g2">제목4</h2>
+</div>
+
+<div id="d2">
+    <h2 id="header1" class="g1 g3">제목1</h2>
+    <h2 id="header2" class="g1">제목2</h2>
+    <h2 id="header3" class="g1 g2 g3">제목3</h2>
+    <h2 id="header4" class="g2">제목4</h2>
+</div>
+
+<h2 id="header1" class="g1 g3">제목1</h2>
+<h2 id="header2" class="g1">제목2</h2>
+<h2 id="header3" class="g1 g2 g3">제목3</h2>
+<h2 id="header4" class="g2">제목4</h2>
+<script>
+"use strict"
+
+var e1 =document.createElement("h2");
+e1.innerHTML = "제목";
+d1.appendChild(e1);
+d1.innerHTML +="<h2>오호라</h2>"
+</script>
+
+</body>
+</html>

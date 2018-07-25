@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<style>
+div {
+    border: 1px solid red;
+    margin: 10px 20px 30px 40px;
+}
+#d1 {
+    height: 150px;
+}
+#d2 {
+    height: 150px;
+}
+</style>
+</head>
+<body>
+<h1>DOM(Document Object Model) API</h1>
+<div id="d1">
+</div>
+
+<div id="d2">
+</div>
+
+<script>
+"use strict"
+
+var e1 = document.createElement("a");
+e1.href = "http://www.daum.net";
+e1.innerHTML ="다음카카오";
+d1.appendChild(e1);
+
+var e2 = document.createElement("a");
+e2.setAttribute("href", "http://www.daum.net");
+e2.innerHTML ="다음카카오";
+d2.appendChild(e2);
+
+
+</script>
+
+</body>
+</html>

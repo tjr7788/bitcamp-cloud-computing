@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>클로저(closure)</h1>
+<script>
+"use strict"
+
+function Calc(v) {
+    this.value = v;
+}
+
+Calc.prototype.plus = function(value) {this.value += value};
+Calc.prototype.minus = function(value) {this.value -= value};
+
+var c1 = new Calc(100);
+c1.plus(50);
+c1.plus(20);
+c1.minus(80);
+console.log(c1.value);
+console.log(c1);
+
+function Calc2(v) {
+    Calc.call(this, v);
+    this.test = "hello";
+}
+
+Calc2.prototype = Object.create(Calc.prototype);
+Calc2.prototype.constructor = Calc2;
+Calc2.prototype.multiple = function(v) {this.value *= v};
+Calc2.prototype.divide = function(v) {this.value /= v};
+
+var c2 = new Calc2(200);
+console.log(c2);
+
+if (c1 instanceof Object) console.log("C1은 Object 객체이다.");
+
+if (c2 instanceof Object) console.log("C2은 Object 객체이다.");
+
+if (c2 instanceof Calc) console.log("C2은 Calc 객체이다.");
+
+if (c2 instanceof Calc2) console.log("C2은 Calc2 객체이다.");
+
+</script>
+
+</body> 
