@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>DOM(Document Object Model) API</h1>
+<button id="btn1">버튼1</button><br>
+<script>
+"use strict"
+btn1.onclick = function(event) {
+    console.log("alt 키 누름여부", event.altKey);
+    console.log("ctrl 키 누름여부", event.ctrlKey);
+    console.log("태그기준으로 X좌표", event.offsetX);
+    console.log("태그기준으로 Y좌표", event.offsetY);
+    console.log("브라우저기준으로 X좌표", event.clientX);
+    console.log("브라우저기준으로 Y좌표", event.clientY);
+    console.log("누른 버튼 번호", event.button);
+};
+
+
+
+</script>
+
+</body>
+</html>

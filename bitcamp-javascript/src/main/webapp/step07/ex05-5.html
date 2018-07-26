@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<style>
+button {
+    height: 30px;
+    margin: 20px;
+    
+}
+div[id^='d1'] {
+    margin: 20px;
+    border: 1px solid black;
+}
+div[id^='d11'] {
+    margin: 20px;
+    border: 1px solid red;
+}
+
+
+</style>
+</head>
+<body>
+<h1>이벤트 전달 단계</h1>
+<form id="form1" action="http://www.daum.net">
+*이름: <input id="fiName" type="text" name="name"><br>
+*나이: <input id="fiAge" type="number" name="age"><br>
+전화: <input id="fiTel" type="text" name="tel"><br>
+<button>등록</button>
+</form>
+
+<script>
+"use strict"
+/*var e = document.querySelector("#form1");
+e.onclick = function(e) {
+    if (fiName.value.length == 0 || fiAge.value.length == 0) {
+        e.preventDefault();
+        alert("필수항목을 입력하세요.");
+        return;
+    }
+}; */
+
+form1.onsubmit = function () {
+    if (fiName.value.length == 0 || fiAge.value.length == 0) {
+        alert("필수항목을 입력하세요.");
+        return false;
+    }
+    return true;
+}
+</script>
+
+</body>
+</html>
+

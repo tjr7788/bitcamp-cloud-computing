@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<style>
+button {
+    height: 30px;
+    margin: 20px;
+    
+}
+div[id^='d1'] {
+    margin: 20px;
+    border: 1px solid black;
+}
+div[id^='d11'] {
+    margin: 20px;
+    border: 1px solid red;
+}
+
+
+</style>
+</head>
+<body>
+<h1>이벤트 전달 단계</h1>
+<a id="a1" href="http://www.daum.net">다음</a><br>
+<a id="a2" href="http://www.naver.com">네이버</a><br>
+
+
+<script>
+"use strict"
+a1.onclick = function(event) {
+    console.log("a1 ....click");
+}
+
+a2.onclick = function(event) {
+    event.preventDefault();
+    console.log("a2 ....click");
+}
+
+</script>
+
+</body>
+</html>
+

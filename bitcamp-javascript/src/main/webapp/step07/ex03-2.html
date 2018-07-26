@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>DOM(Document Object Model) API</h1>
+<input id="txt1" type="text">
+<button id="btn1">버튼1</button><br>
+<script>
+"use strict"
+txt1.onclick = function() {
+    console.log("텍스트 눌렀음");
+    var e = new CustomEvent("okok", {
+        detail: {
+            name: "홍길동",
+            age: 20,
+            working: false
+        }
+    });
+    btn1.dispatchEvent(e);
+};
+
+btn1.addEventListener("okok", function(event) {
+    console.log("name=", event.detail.name);
+    console.log("age=", event.detail.age);
+    console.log("working=", event.detail.working);
+});
+
+
+</script>
+
+</body>
+</html>

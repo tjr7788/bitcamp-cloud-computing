@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<style>
+#resultDiv {
+    height: 200px;
+    
+}
+</style>
+</head>
+<body>
+<h1>AJAX</h1>
+<button id="btn1">버튼1</button>
+<script>
+"use strict"
+btn1.onclick = function() {
+    var xhr = new XMLHttpRequest();
+    
+    xhr.open('GET', 'ex01-1.jsp', false);
+    
+    xhr.send();
+    
+    console.log(xhr.responseText);
+}
+
+</script>
+
+</body>
+</html>

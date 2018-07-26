@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>DOM(Document Object Model) API</h1>
+<button id="btn1" onclick="var v = prompt('나이는?'); if (parseInt(v) < 19) alert('미성년입니다.'); else alert('성년입니다.');">버튼1</button>
+<button id="btn2" onclick="f1()">버튼2</button>
+<button id="btn3">버튼3</button>
+<button id="btn4">버튼4</button>
+<script>
+"use strict"
+function f1() {
+    var v = prompt('나이는?'); 
+    if (parseInt(v) < 19) alert('미성년입니다.'); 
+    else alert('성년입니다.');
+}
+
+
+var e = document.querySelector("#btn3");
+e.onclick = function(event) {
+    console.log(event)
+    var v = prompt('나이는?'); 
+    if (parseInt(v) < 19) alert('미성년입니다.'); 
+    else alert('성년입니다.');
+};
+
+var e = document.querySelector("#btn4");
+e.addEventListener("click", function(event) {
+    console.log(event)
+    var v = prompt('나이는?'); 
+    if (parseInt(v) < 19) alert('미성년입니다.'); 
+    else alert('성년입니다.');
+});
+e.addEventListener("click", function() {alert("sdf")});
+
+
+
+</script>
+
+</body>
+</html>

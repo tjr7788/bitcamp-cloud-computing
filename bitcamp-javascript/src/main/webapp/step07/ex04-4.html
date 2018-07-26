@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<style>
+button {
+    height: 30px;
+    margin: 20px;
+    
+}
+div[id^='d1'] {
+    margin: 20px;
+    border: 1px solid black;
+}
+div[id^='d11'] {
+    margin: 20px;
+    border: 1px solid red;
+}
+
+
+</style>
+</head>
+<body>
+<h1>이벤트 전달 단계</h1>
+<div id="d1">d1
+    <div id="d11">d11
+        <button id="btn1">버튼1</button>
+        <button id="btn2">버튼2</button>
+    </div>
+</div>
+
+
+<script>
+"use strict"
+d1.onclick = function() {console.log("d1")};
+d11.onclick = function() {console.log("d11")};
+
+
+btn1.addEventListener("click", function(event) {
+    event.stopPropagation();
+    console.log("btn1...1");
+});
+
+btn1.addEventListener("click", function(event) {
+    console.log("btn1...2");
+});
+
+btn1.addEventListener("click", function(event) {
+    console.log("btn1...3");
+});
+
+btn2.addEventListener("click", function(event) {
+    event.stopImmediatePropagation();
+    console.log("btn2...1");
+});
+
+btn2.addEventListener("click", function(event) {
+    console.log("btn2...2");
+});
+
+btn2.addEventListener("click", function(event) {
+    console.log("btn2...3");
+});
+
+
+</script>
+
+</body>
+</html>

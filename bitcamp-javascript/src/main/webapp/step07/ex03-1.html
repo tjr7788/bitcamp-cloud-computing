@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+</head>
+<body>
+<h1>DOM(Document Object Model) API</h1>
+<input id="txt1" type="text">
+<button id="btn1">버튼1</button><br>
+<script>
+"use strict"
+txt1.onclick = function() {
+    console.log("텍스트 눌렀음");
+    var e = new MouseEvent("click");
+    btn1.dispatchEvent(e);
+};
+
+btn1.onclick = function(event) {
+    console.log("버튼 눌렀음!");
+};
+
+
+</script>
+
+</body>
+</html>

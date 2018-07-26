@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DOM</title>
+<style>
+.strong {
+    font-weight: bolder;
+    background-color: black;
+    color: white;
+}
+</style>
+</head>
+<body>
+<h1>DOM(Document Object Model) API</h1>
+<div id="d1">
+    <img src="https://pbs.twimg.com/media/DbefPmwV0AAQRxM.jpg">
+    <img src="http://file3.instiz.net/data/cached_img/upload/2018/07/06/17/38411fa538657c127e21e81ebabcd0b8.jpg">
+    <img src="http://cdn2.diodeo.com/cdn/news_photo/2018/06/25/2920204-01.jpg">
+</div>
+<script>
+"use strict"
+var tid = setInterval(() => {
+	var e1 = document.querySelector("#d1 > img:first-child");
+	if (e1 == null) {
+	    clreaInterval(tid);
+	}
+	d1.removeChild(e1);
+}, 2000);
+
+</script>
+
+</body>
+</html>
