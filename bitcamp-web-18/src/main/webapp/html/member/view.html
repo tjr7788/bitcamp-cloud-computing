@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>멤버 뷰</title>
+</head>
+<body>
+<h1>멤버2</h1>
+<table border='1'>
+
+
+<form>
+<tr><th>아이디</th>
+    <td><input readonly type='text'id='eId' readonly></td></tr>
+<tr><th>이메일</th>
+    <td><input type='email' id='eEmail'></td></tr>
+<tr><th>암호</th>
+    <td><input type='password'id='ePassword'></td></tr>
+    
+<p>
+    <button type='button' id='eListBtn'>목록으로</button>
+    <button type='button' id='eUpdateBtn'>변경하기</button>
+    <button type='button' id='eDeleteBtn'>삭제하기</button>
+</p>
+</form>
+<script src="../js/common.js"></script>
+</table>
+<script>
+"use strict"
+var data = null;
+var {id, page, size} = parseQuery(location.href);
+
+if (id == null) {
+    alert('오류입니다.');
+} else {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState < 4) return;
+        if (xhr.status !== 200) {
+            alert("오류발생");
+            return;
+        }
+        data = JSON.parse(xhr.responseText);
+        if (data.member == null) {
+            alert("아이디가 무효합니다.");
+            location.href = "list.html";
+        }
+        eId.value = data.member.id;
+        eEmail.value = data.member.email;
+    }
+    xhr.open('GET', `../../json/member/view/${id}`, true);
+    xhr.send();
+}
+eListBtn.onclick = () => {
+    location.href= `list.html?page=${page}&size=${size}`;
+}
+</script>
+</body>
+</html>
+

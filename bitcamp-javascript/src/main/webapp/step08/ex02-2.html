@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<style>
+#resultDiv {
+    height: 200px;
+    
+}
+</style>
+</head>
+<body>
+<h1>AJAX</h1>
+<button id="btn1">버튼1</button>
+<script>
+"use strict"
+btn1.onclick = function() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        //readyState
+        //0: 객체 준비
+        //1: open() 호출 후, 서버에 연결된 후
+        //2: send() 호출 후, 서버에 요청을 보낸 후
+        //3: 서버에서 응답결과를 받는중
+        //4: 응답이 완료됨
+        if ()
+        console.log(xhr.readyState);        
+    }
+    xhr.open('GET', 'ex01-1.jsp', true);
+    xhr.send();
+    
+}
+
+</script>
+
+</body>
+</html>

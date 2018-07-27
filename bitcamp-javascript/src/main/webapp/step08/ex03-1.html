@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>javascript</title>
+<style>
+#resultDiv {
+    height: 200px;
+    
+}
+</style>
+</head>
+<body>
+<h1>AJAX</h1>
+<button id="btn1">버튼1</button>
+<div id="resultDiv"></div>
+<script>
+"use strict"
+btn1.onclick = function() {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState < 4) return;
+        if (xhr.status === 200) {
+            console.log(xhr.responseText);
+            resultDiv.innerHTML = xhr.responseText;
+        } else {
+            alert("오류발생");
+        }
+    }
+    xhr.open('GET', 'ex01-2.jsp?a=100&op=%2b&b=100', true);
+    xhr.send();
+    
+}
+
+</script>
+
+</body>
+</html>

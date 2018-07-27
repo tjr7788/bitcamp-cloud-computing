@@ -27,13 +27,18 @@
 btn1.onclick = function() {
     console.log(iA.value, iOp.value, iB.value);
     var xhr = new XMLHttpRequest();
-    
-    xhr.open('GET', 'ex01-2.jsp?a=' + iA.value + '&op=' + iOp.value + '&b=' + iB.value, false);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState < 4) return;
+        if (xhr.status === 200) {
+            console.log(xhr.responseText);
+            resultDiv.innerHTML = xhr.responseText;
+        } else {
+            alert("오류발생");
+        }
+    }
+    xhr.open('GET', 'ex01-3.jsp?a=' + iA.value + '&op=' + iOp.value + '&b=' + iB.value, true);
     
     xhr.send();
-    
-    console.log(xhr.responseText);
-    resultDiv.innerHTML = xhr.responseText;
 }
 
 </script>
