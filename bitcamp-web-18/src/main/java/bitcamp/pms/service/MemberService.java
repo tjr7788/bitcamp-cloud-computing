@@ -27,7 +27,7 @@ public class MemberService {
     //@Transactional()  에노테이션으로 해도되지만 xml로 설정할수도있다.
     public int update(Member member) {
         int count = memberDao.update(member);
-        if (count != 100) throw new RuntimeException("일부로 예외 발생!");
+        //if (count != 100) throw new RuntimeException("일부로 예외 발생!");
         return count;
     }
 

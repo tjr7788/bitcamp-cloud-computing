@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="msapplication-tap-highlight" content="no" />
+<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+<meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+<title>app01</title>
+<style>
+.DIV {
+    position:fixed;
+    left:20%;
+    top:20%;
+    border:1px solid black;
+    width:300px;
+}
+.DIV-line {
+    position:relative;
+    left:0px;
+    top:0px;
+    width:100%;
+    height:100px;
+}
+.DIV1 {
+    position:absolute;
+    border-bottom:1px solid black;
+    left:0px;
+    top:0px;
+    width:33%;
+    height:100%;
+}
+.DIV2 {
+    position:absolute;
+    border-left:1px solid black;
+    border-bottom:1px solid black;
+    left:33%;
+    top:0px;
+    width:33%;
+    height:100%;
+}
+.DIV3 {
+    position:absolute;
+    border-left:1px solid black;
+    border-bottom:1px solid black;
+    left:66%;
+    top:0px;
+    width:33%;
+    height:100%;
+}
+
+img {
+    width:100%;
+    height:100%;
+}
+
+</style>
+</head>
+
+<body>
+<h1>TIC TAC TOE</h1>
+<div class='DIV'>
+    <div class='DIV-line'>
+        <div data-value='1' class='DIV1'></div>
+        <div data-value='2' class='DIV2'></div>
+        <div data-value='3' class='DIV3'></div>
+    </div>
+    <div class='DIV-line'>
+        <div data-value='4' class='DIV1'></div>
+        <div data-value='5' class='DIV2'></div>
+        <div data-value='6' class='DIV3'></div>
+    </div>
+    <div class='DIV-line'>
+        <div data-value='7' class='DIV1'></div>
+        <div data-value='8' class='DIV2'></div>
+        <div data-value='9' class='DIV3'></div>
+    </div>
+</div>
+
+
+<p>
+<a href="member/list.html">회원 관리</a><br>
+</p>
+</body>
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script>
+"use strict"
+
+var generateRandom = function (min, max) {
+  var ranNum = Math.floor(Math.random()*(max-min+1)) + min;
+  return ranNum;
+}
+
+var counting = [];
+
+function timer(event) {
+	setTimeout(() => {
+	    console.log('지정된 시간이 경과하면 딱 한 번만 호출된다.');
+	    let ranNum = generateRandom(1, 9);
+	    while (counting[ranNum] == 1) {
+	        ranNum = generateRandom(1, 9);
+	        console.log(counting);
+	        console.log(ranNum);
+	    }
+        counting[ranNum] = 1;
+	    $('[data-value='+ ranNum + ']').html("<img src='image/X_sign.png'>");
+	    $('.DIV').bind('click', function(event){
+	        $(event.target).html("<img src='image/O_sign.png'>");
+	        $('.DIV').unbind('click');
+	        timer(event);
+	    });
+	}, 2000);
+}
+
+
+
+$('.DIV').click(function(event) {
+    counting[$(event.target).attr("data-value")] = 1;
+    $(event.target).html("<img src='image/O_sign.png'>");
+    $('.DIV').unbind('click');
+    timer(event);
+});
+/*for (var i = 0; i < 3; i++) {
+    for (var ii = 1; ii < 4; ii++) {
+	    $('.DIV-line').eq(i).find('.DIV' + ii).click(function(event) {
+	        $(event.target).html("<img src='image/O_sign.png'>");
+	        //$('.DIV').unbind('click');
+	        timer();
+	    });
+    }
+}*/
+</script>
+</html>

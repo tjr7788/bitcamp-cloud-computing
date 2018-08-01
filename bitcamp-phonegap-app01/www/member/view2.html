@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<title>멤버 뷰</title>
+</head>
+<body>
+<h1>멤버2</h1>
+<table border='1'>
+
+
+<form>
+<tr><th>아이디</th>
+    <td><input readonly type='text'id='eId' readonly></td></tr>
+<tr><th>이메일</th>
+    <td><input type='email' id='eEmail'></td></tr>
+<tr><th>암호</th>
+    <td><input type='password'id='ePassword'></td></tr>
+    
+<p>
+    <button type='button' id='eListBtn'>목록으로</button>
+    <button type='button' id='eUpdateBtn' class="viewform">변경하기</button>
+    <button type='button' id='eDeleteBtn' class="viewform">삭제하기</button>
+    <button type='button' id='eAddBtn' class="newform">등록하기</button>
+</p>
+</form>
+</table>
+<script src="../js/bit.js"></script>
+<script>
+"use strict"
+var data = null;
+var {id, page, size} = $.parseQuery(location.href);
+if (id == undefined) {
+    $('.viewform').css('display', 'none');
+    $(eId).removeAttr('readonly');
+} else {
+    $('.newform').css('display', 'none');
+    $.getJSON(`../../json/member/view/${id}`, function(result) {
+       data = result;
+       if (data.member == null) {
+           alert("아이디가 무효합니다.");
+           location.href = "list.html";
+       }
+       $(eId).val(data.member.id);
+       $(eEmail).val(data.member.email);
+    });
+}
+/* $(eListBtn).click = () => {
+    if (id == undefined) {
+        location.href= 'list.html';
+    } else {
+        location.href= `list.html?page=${page}&size=${size}`;
+    }
+} */
+$(eListBtn).click = function() {
+   console.log('클릭');
+}
+$(eUpdateBtn).click = () => {
+    $.post('../../json/member/update', 
+    {
+        id: $(eId).val(),
+        email: $(eEmail).val(),
+        password: $(ePassword).val()
+    },
+       function(data) {
+        if (data.status == 'success') {
+            location.href= `list.html?page=${page}&size=${size}`;
+        } else {
+            alert('변경오류입니다.');
+            console.log(data.error);
+        }
+       });
+}
+
+eDeleteBtn.onclick = () => {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState < 4) return;
+        if (xhr.status !== 200) {
+            alert('오류발생');
+            return;
+        }
+        let data = JSON.parse(xhr.responseText);
+        if (data.status == 'success') {
+            location.href= `list.html?page=${page}&size=${size}`;
+        } else {
+            alert('삭제오류입니다.');
+            console.log(data.error);
+        }
+        console.log(data);
+    }
+    xhr.open('GET', `../../json/member/delete?id=${eId.value}`, true);
+    xhr.send();
+}
+eAddBtn.onclick = () => {
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState < 4) return;
+        if (xhr.status !== 200) {
+            alert('오류발생');
+            return;
+        }
+        location.href = 'list.html';
+    }
+    xhr.open('POST', '../../json/member/add', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.send(`id=${eId.value}&email=${eEmail.value}&password=${ePassword.value}`);
+}
+</script>
+</body>
+</html>
+
