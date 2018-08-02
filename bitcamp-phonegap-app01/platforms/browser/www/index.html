@@ -98,12 +98,12 @@ function timer(event) {
 	setTimeout(() => {
 	    console.log('지정된 시간이 경과하면 딱 한 번만 호출된다.');
 	    let ranNum = generateRandom(1, 9);
-	    while (counting[ranNum] == 1) {
+	    while (counting[ranNum] != null) {
 	        ranNum = generateRandom(1, 9);
 	        console.log(counting);
 	        console.log(ranNum);
 	    }
-        counting[ranNum] = 1;
+        counting[ranNum] = 2;
 	    $('[data-value='+ ranNum + ']').html("<img src='image/X_sign.png'>");
 	    $('.DIV').bind('click', function(event){
 	        $(event.target).html("<img src='image/O_sign.png'>");

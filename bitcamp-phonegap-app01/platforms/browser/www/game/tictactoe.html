@@ -93,6 +93,7 @@ var generateRandom = function (min, max) {
 }
 
 var counting = [];
+clickEvent();
 
 function timer(event) {
 	setTimeout(() => {
@@ -104,23 +105,22 @@ function timer(event) {
 	        console.log(ranNum);
 	    }
         counting[ranNum] = 2;
-	    $('[data-value='+ ranNum + ']').html("<img src='image/X_sign.png'>");
-	    $('.DIV').bind('click', function(event){
-	        $(event.target).html("<img src='image/O_sign.png'>");
-	        $('.DIV').unbind('click');
-	        timer(event);
-	    });
+	    $('[data-value='+ ranNum + ']').html("<img src='../image/X_sign.png'>");
+	    clickEvent();
 	}, 2000);
+}
+
+function clickEvent() {
+    $('.DIV').bind('click', function(event){
+        counting[$(event.target).attr("data-value")] = 1;
+        $(event.target).html("<img src='../image/O_sign.png'>");
+        $('.DIV').unbind('click');
+        timer(event);
+    });
 }
 
 
 
-$('.DIV').click(function(event) {
-    counting[$(event.target).attr("data-value")] = 1;
-    $(event.target).html("<img src='image/O_sign.png'>");
-    $('.DIV').unbind('click');
-    timer(event);
-});
 /*for (var i = 0; i < 3; i++) {
     for (var ii = 1; ii < 4; ii++) {
 	    $('.DIV-line').eq(i).find('.DIV' + ii).click(function(event) {
