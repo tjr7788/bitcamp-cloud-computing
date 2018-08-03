@@ -1,10 +1,11 @@
-package bitcamp.servlet;
+package bitcamp.mvc.servlet;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletException;
@@ -18,8 +19,8 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
 @SuppressWarnings("serial")
-@WebServlet("/fileupload01")
-public class FileUploadServlet01 extends HttpServlet {
+@WebServlet("/fileupload02")
+public class FileUploadServlet02 extends HttpServlet {
     @Override
     protected void doPost(
             HttpServletRequest req, 
@@ -38,34 +39,33 @@ public class FileUploadServlet01 extends HttpServlet {
         ServletFileUpload upload = new ServletFileUpload(factory);
     
         // 클라이언트가 보낸 데이터를 분석한다.
-        HashMap<String,Object> paramMap = new HashMap<>();
         try {
+            Map<String, List<FileItem>> paramMap = upload.parseParameterMap(req);
             List<FileItem> items = upload.parseRequest(req);
-            for (FileItem item : items) {
-                if (item.isFormField()) { // 일반 폼 데이터인 경우,
-                    paramMap.put(item.getFieldName(), 
-                            item.getString("UTF-8"));
-                } else { // 파일 데이터
-                    // 새 파일명 준비
-                    String newfilename = UUID.randomUUID().toString(); 
-                    String path = this.getServletContext().getRealPath(
-                            "/files/" + newfilename);
-                    item.write(new File(path));
-                    paramMap.put(item.getFieldName(), 
-                            newfilename);
-                }
-            }
+            String name = paramMap.get("name").get(0).getString("UTF-8");
+            String age= paramMap.get("age").get(0).getString("UTF-8");
+            FileItem photoItem = paramMap.get("photos").get(0);
+            String newfilename = UUID.randomUUID().toString(); 
+            String path = this.getServletContext().getRealPath(
+                    "/files/" + newfilename);
+            paramMap.get("photos").get(0).write(new File(path));
         } catch (Exception e) {
             e.printStackTrace();
         }
         resp.setContentType("text/html;charset=UTF-8");
         PrintWriter out = resp.getWriter();
         out.println("<html><head><title>파일업로드</title></head><body>");
-        out.printf("name = %s<br>\n", paramMap.get("name"));
-        out.printf("age = %s<br>\n", paramMap.get("age"));
+        out.printf("name = %s<br>\n", name);
+        out.printf("age = %s<br>\n", age);
         out.printf("photo = <a href='files/%s'>%s</a><br>\n", 
                 paramMap.get("photo"),
                 paramMap.get("photo"));
+        out.println("<p><img id='img1'></p>");
+        out.println("<script>");
+        out.println("setTimeout(() => {");
+        out.printf("document.getElementById('img1').src = 'files/%s';", paramMap.get("photo")); 
+        out.println("}, 5000);");
+        out.println("</script>");
         out.println("</body></html>");
     }
 }
