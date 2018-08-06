@@ -37,6 +37,9 @@ dependencies {
     compile 'com.google.guava:guava:23.0'
     testCompile 'junit:junit:4.12'
     
+    // https://mvnrepository.com/artifact/net.coobird/thumbnailator
+    compile group: 'net.coobird', name: 'thumbnailator', version: '0.4.8'
+    
 }
 
 repositories {
