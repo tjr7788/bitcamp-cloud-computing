@@ -11,22 +11,18 @@ var con = mysql.createConnection({
     password: '1111'
 });
 
-
 con.connect(function(err) {
     if (err) throw err;
     
     console.log('연결성공입니다.');
     
-    var email = 'user120@122';
-    var mid = "user01' or 1=1 or ''='";
-    //var mid = 'user01'
-    var pwd = '1111';
-    con.query(`delete from pms2_member where mid=?`, 
-            [mid],
-            function(err, results) {
+    
+    var title = 'title1';
+    var contents = 'contents1';
+    con.query('insert into pms2_board(titl, cont, cdt) values(?,?,now())', [title, contents], function(err, result) {
         if (err) throw err;
         
-        console.log(results);
+        console.log(result.insertId);
     });
     con.end(function(err) {
         if (err) throw err;
