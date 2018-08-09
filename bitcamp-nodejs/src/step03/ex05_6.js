@@ -1,10 +1,8 @@
 // 주제: 코드를 모듈로 분리 - 요청 핸들러를 관리하는 코드 분리
 
 
-const http = require('http')
-const url = require('url')
 const mysql = require('mysql')
-const express = require('./express01')
+const app = require('express')();
 
 var pool = mysql.createPool({
     connectionLimit: 10,
@@ -15,47 +13,19 @@ var pool = mysql.createPool({
     password: '1111'
 });
 
-const server = http.createServer((req, res) => {
-    var urlInfo = url.parse(req.url, true);
-    
-    if (urlInfo.pathname === '/favicon.ico') {
-        res.end();
-        return;
-    }
-            
+
+app.get('/member/list', (req, res) => {
     res.writeHead(200, {
-        'Content-Type': 'text/plain;charset=UTF-8'
-    });
-    
-    var handler = express.getHandler(urlInfo.pathname);
-    
-    if (handler) {
-        try {
-            handler(urlInfo, req, res);
-        } catch (err) {
-            res.end('실행 중 오류 발생!');
-        }
-    } else {
-        res.end('해당 URL을 지원하지 않습니다!');
-        return;
-    }
-    
-});
-
-
-server.listen(8000, () => {
-    console.log('서버가 시작됨!')
-})
-
-express.add('/member/list', (urlInfo, req, res) => {
+        'Content-Type' : 'text/plain; charset=UTF-8' 
+     });
     var pageNo = 1;
     var pageSize = 3;
     
-    if (urlInfo.query.pageNo) {
-        pageNo = parseInt(urlInfo.query.pageNo)
+    if (req.query.pageNo) {
+        pageNo = parseInt(req.query.pageNo)
     }
-    if (urlInfo.query.pageSize) {
-        pageSize = parseInt(urlInfo.query.pageSize)
+    if (req.query.pageSize) {
+        pageSize = parseInt(req.query.pageSize)
     }
     
     var startIndex = (pageNo - 1) * pageSize;
@@ -75,11 +45,16 @@ express.add('/member/list', (urlInfo, req, res) => {
     });
 });
 
-express.add('/member/add', (urlInfo, req, res) => {
+app.get('/member/add', (req, res) => {
+    
+    res.writeHead(200, {
+        'Content-Type' : 'text/plain; charset=UTF-8' 
+     });
+    
     pool.query(
             'insert into pms2_member(mid,email,pwd)\
             values(?, ?, password(?))',
-        [urlInfo.query.id, urlInfo.query.email, urlInfo.query.password],
+        [req.query.id, req.query.email, req.query.password],
         function(err, results) {
             if (err) {
                 res.end('데이터 처리 중 예외 발생!')
@@ -91,15 +66,18 @@ express.add('/member/add', (urlInfo, req, res) => {
     });
 });
 
-express.add('/member/update', (urlInfo, req, res) => {
+app.get('/member/update', (req, res) => {
+    res.writeHead(200, {
+        'Content-Type' : 'text/plain; charset=UTF-8' 
+     });
     pool.query(
             'update pms2_member set\
              email=?,\
              pwd=?\
              where mid=?',
-        [urlInfo.query.email,
-         urlInfo.query.password,
-         urlInfo.query.id],
+        [req.query.email,
+         req.query.password,
+         req.query.id],
         function(err, results) {
             if (err) {
                 res.end('DB 조회 중 예외 발생!')
@@ -111,9 +89,12 @@ express.add('/member/update', (urlInfo, req, res) => {
     });
 });
 
-express.add('/member/delete', (urlInfo, req, res) => {
+app.get('/member/delete', (req, res) => {
+    res.writeHead(200, {
+        'Content-Type' : 'text/plain; charset=UTF-8' 
+     });
     pool.query('delete from pms2_member where mid=?',
-        [urlInfo.query.id],
+        [req.query.id],
         function(err, results) {
             if (err) {
                 res.end('DB 조회 중 예외 발생!')
@@ -126,12 +107,17 @@ express.add('/member/delete', (urlInfo, req, res) => {
 });
 
 
-express.add('/hello', (urlInfo, req, res) => {
+app.get('/hello', (req, res) => {
+    res.writeHead(200, {
+        'Content-Type' : 'text/plain; charset=UTF-8' 
+     });
     res.write(`${urlInfo.query.name}님 안녕하세요!`);
     res.end();
 });
 
-
+app.listen(8000, () => {
+    console.log('서버연결됨');
+});
 
 
 
