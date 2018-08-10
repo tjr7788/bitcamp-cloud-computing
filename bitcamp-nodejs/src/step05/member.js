@@ -52,7 +52,7 @@ router.get('/add', (req, res) => {
      });
     
     memberdao.add(req.query, (err, result) => {
-         if (err) {
+        if (err) {
             res.end('데이터 처리 중 예외 발생!')
             return;
         }

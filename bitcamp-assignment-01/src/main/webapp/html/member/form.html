@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 가입</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+<style>
+.container {
+    margin-top:100px;
+    max-width:30%;
+}
+h1 {
+    text-align: center;
+    margin:20px;
+    font-weight: bolder;
+}
+</style>
+</head>
+<body>
+<div class="container">
+	<h1>회원 가입</h1>
+	<form>
+	  <div class="form-group">
+	    <label for="exampleInputEmail1">이메일</label>
+	    <input type="email" id="eEmail"  class="form-control" aria-describedby="emailHelp">
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputPassword1">이름</label>
+	    <input type="text" id="eName" class="form-control">
+	  </div>
+	  <div class="form-group">
+	    <label for="exampleInputPassword1">비밀번호</label>
+	    <input type="password" id="ePassword" class="form-control">
+	  </div>
+	  <div class="text-center">
+	    <button type="button" id="eJoinBtn" class="btn btn-primary">가입하기</button>
+	  </div>
+	</form>
+</div>
+
+<script src="../node_modules/jquery/dist/jquery.min.js"></script>
+<script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
+<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="../js/common.js"></script>
+<script src="form.js"></script>
+</body>
+</html>

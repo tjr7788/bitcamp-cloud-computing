@@ -61,6 +61,7 @@ $(eUpdateBtn).click(function() {
         },
         'json');
 });
+
 $(eAddBtn).click(function() {
     $.post(serverApiAddr + '/json/member/add', {
         id: $(eId).val(),
