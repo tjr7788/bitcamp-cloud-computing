@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="bitcamp.dao.MemberDao">
+    <resultMap type="Member" id="MemberMap">
+        <id column="mno" property="no"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="pwd" property="password"/>
+    </resultMap>
+    
+    <insert id="insert" parameterType="Member">
+        insert into a_member(name, email, pwd) values(#{name}, #{email}, password(#{password}))
+    </insert>
+    
+    <select id="selectUser" parameterType="Member" resultMap="MemberMap">
+        select name, email, pwd from a_member where email=#{email} and pwd=password(#{password})
+    </select>
+</mapper>
